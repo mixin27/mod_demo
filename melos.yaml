@@ -1,0 +1,58 @@
+name: mod_demo
+
+packages:
+  - packages/**
+  - "*"
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  gen:single:
+    run: melos exec -c 1 --fail-fast -- flutter pub run build_runner build --delete-conflicting-outputs
+    description: Generate files with `build_runner` for a selected package.
+    select-package:
+      depends-on: build_runner
+
+  gen:single:watch:
+    run: melos exec -c 1 --fail-fast -- flutter pub run build_runner watch --delete-conflicting-outputs
+    description: Generate files with `build_runner` for a selected package.
+    select-package:
+      depends-on: build_runner
+
+  gen:all:
+    run: melos run gen:single --no-select
+    description: Generate files with `build_runner` for all packages.
+    select-package:
+      depends-on: build_runner
+
+  gen:all:watch:
+    run: melos run gen:single:watch --no-select
+    description: Generate files with `build_runner` for all packages.
+    select-package:
+      depends-on: build_runner
+
+  test:
+    run: melos exec --dir-exists="test" --fail-fast -- flutter test --no-pub --test-randomize-ordering-seed random
+    description: Run all tests.
+
+  analyze:
+    run: melos exec -- flutter analyze .
+    description: Run `dart analyze` in all packages.
+
+  cov:gen:
+    run: melos exec --dir-exists="test" --fail-fast -- flutter test --no-pub --coverage --test-randomize-ordering-seed random
+    description: Run all test and generate coverage data per package
+
+  cov:merge:l:
+    run: rm -dfr coverage/lcov.info && melos exec -- sh MELOS_ROOT_PATH/merge-coverage.sh
+    description: Merge all coverage data (Linux)
+
+  cov:merge:m:
+    run: rm -dfr coverage/lcov.info && melos exec -- sh MELOS_ROOT_PATH/merge-coverage.sh
+    description: Merge all coverage data (macOS)
+
+  cov:merge:w:
+    run: if exist Coverage\lcov.info ( del /f /q coverage\lcov.info ) && melos exec -- MELOS_ROOT_PATH\merge-coverage.bat
+    description: Merge all coverage data (Windows)
