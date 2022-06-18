@@ -15,7 +15,7 @@ scripts:
     select-package:
       depends-on: build_runner
 
-  gen:single:watch:
+  gen:watch:single:
     run: melos exec -c 1 --fail-fast -- flutter pub run build_runner watch --delete-conflicting-outputs
     description: Generate files with `build_runner` for a selected package.
     select-package:
@@ -23,12 +23,6 @@ scripts:
 
   gen:all:
     run: melos run gen:single --no-select
-    description: Generate files with `build_runner` for all packages.
-    select-package:
-      depends-on: build_runner
-
-  gen:all:watch:
-    run: melos run gen:single:watch --no-select
     description: Generate files with `build_runner` for all packages.
     select-package:
       depends-on: build_runner

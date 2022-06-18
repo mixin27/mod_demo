@@ -1,5 +1,6 @@
 name: application
 description: A new Flutter package project.
+publish_to: "none"
 version: 0.0.1
 homepage:
 
@@ -10,11 +11,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  freezed_annotation: ^2.0.3
+
+  # riverpod - Flutter + Flutter Hooks
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.0.0-dev.9
+
+  dartz: ^0.10.1
+
+  domain:
+    path: ../domain
+
+  infrastructure:
+    path: ../infrastructure
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: any
+  freezed: ^2.0.3+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

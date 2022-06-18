@@ -1,5 +1,6 @@
 name: infrastructure
 description: A new Flutter package project.
+publish_to: "none"
 version: 0.0.1
 homepage:
 
@@ -11,10 +12,24 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared:
+    path: ../shared
+
+  domain:
+    path: ../domain
+
+  freezed_annotation: ^2.0.3
+  json_annotation: ^4.5.0
+  dio: ^4.0.6
+  dartz: ^0.10.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: any
+  freezed: ^2.0.3+1
+  json_serializable: ^6.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
