@@ -26,7 +26,7 @@ class PostErrorWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: onRefreshed,
             icon: const Icon(Icons.refresh),
             label: Text('Refresh'.toUpperCase()),
           ),

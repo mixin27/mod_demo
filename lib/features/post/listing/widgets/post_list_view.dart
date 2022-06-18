@@ -19,13 +19,18 @@ class PostListView extends HookConsumerWidget {
       ),
       success: (_) {
         final posts = _.posts;
-        return ListView.separated(
-          itemCount: posts.length,
-          itemBuilder: (context, index) {
-            final post = posts[index];
-            return PostListItem(post: post);
+        return RefreshIndicator(
+          onRefresh: () async {
+            await ref.read(allPostsNotifierProvider.notifier).getAllPosts();
           },
-          separatorBuilder: (context, index) => const Divider(),
+          child: ListView.separated(
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return PostListItem(post: post);
+            },
+            separatorBuilder: (context, index) => const Divider(),
+          ),
         );
       },
       error: (_) => PostErrorWidget(
